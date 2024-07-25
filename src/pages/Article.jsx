@@ -1,37 +1,39 @@
-import React, { useEffect, useState } from 'react'
-import { ArticleComments, ArticleMeta } from '../components'
-import { useArticleQuery } from '../hooks'
-import { useParams } from 'react-router-dom';
-import axios from 'axios';
+import React, { useEffect, useState } from "react";
+import { ArticleComments, ArticleMeta } from "../components";
+import { useArticleQuery } from "../hooks";
+import { useParams } from "react-router-dom";
+import axios from "axios";
 function Article() {
-//   const { data } = useArticleQuery()
-//   const { title, description, body } = data.article
-const [article, setArticle] = useState([]);
-const { slug } = useParams()
+  //   const { data } = useArticleQuery()
+  //   const { title, description, body } = data.article
+  const [article, setArticle] = useState([]);
+  const { slug } = useParams();
 
-console.log('article',article)
+  console.log("article", article);
 
-const getArticleBySlug = async (slug) => {
-    const {data} = await axios.get(`http://localhost:3001/api/articles/${slug}`);
-  
+  const getArticleBySlug = async (slug) => {
+    const { data } = await axios.get(
+      `https://blogging-app-backend-dg69.onrender.com/api/articles/${slug}`
+    );
+
     console.log("getArticleBySlug", { data });
-  
-    setArticle(data.article) ;
+
+    setArticle(data.article);
   };
-useEffect(() => {
-   
-
-    if(!slug) return;
+  useEffect(() => {
+    if (!slug) return;
     getArticleBySlug(slug);
-
-}, [slug])
+  }, [slug]);
 
   return (
     <div className="article-page">
       <div className="banner">
         <div className="container">
           <h1>{article?.title}</h1>
-          <ArticleMeta author={article?.author} createdAt={article?.createdAt} />
+          <ArticleMeta
+            author={article?.author}
+            createdAt={article?.createdAt}
+          />
         </div>
       </div>
       <div className="container page">
@@ -43,16 +45,19 @@ useEffect(() => {
         </div>
         <hr />
         <div className="article-actions">
-          <ArticleMeta author={article?.author} createdAt={article?.createdAt} />
+          <ArticleMeta
+            author={article?.author}
+            createdAt={article?.createdAt}
+          />
         </div>
         <div className="row">
-            <div className='col-xs-12 col-md-8 offeset-md-2'>
-                <ArticleComments />
-            </div>
+          <div className="col-xs-12 col-md-8 offeset-md-2">
+            <ArticleComments />
+          </div>
         </div>
       </div>
     </div>
-  )
+  );
 }
 
-export default Article
+export default Article;

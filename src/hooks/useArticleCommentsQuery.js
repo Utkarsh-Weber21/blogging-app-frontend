@@ -5,7 +5,7 @@ import { useParams } from "react-router-dom";
 
 const getArticleComments = async (slug) => {
   const { data } = await axios.get(
-    `http://localhost:3001/api/articles/${slug}/comments`
+    `https://blogging-app-backend-dg69.onrender.com/api/articles/${slug}/comments`
   );
 
   //   console.log("getCurrentUser", { data });
@@ -26,7 +26,6 @@ function useArticleCommentsQuery() {
       const data = await getArticleComments(slug);
       return data;
     },
-
 
     refetchOnWindowFocus: true,
     staleTime: 0,

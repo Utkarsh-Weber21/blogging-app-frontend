@@ -1,12 +1,13 @@
-
 import { useQuery } from "@tanstack/react-query";
 import React from "react";
-import axios from 'axios';
+import axios from "axios";
 
 const getAllTags = async () => {
-  const {data} = await axios.get(`http://localhost:3001/api/tags`);
+  const { data } = await axios.get(
+    `https://blogging-app-backend-dg69.onrender.com/api/tags`
+  );
 
-//   console.log("getCurrentUser", { data });
+  //   console.log("getCurrentUser", { data });
 
   return data;
 };
